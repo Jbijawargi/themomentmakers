@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Products</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<script type="module"
+src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
+</script>
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+  <div class="logo">
+    <img src="images/logo.png">
+  </div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+</header>
+
+<section class="container">
+
+<h1 class="center">Build Your Premium Kit</h1>
+
+<div class="grid">
+
+<!-- PRODUCT -->
+
+<div class="card"
+onclick="openModal('models/mug.glb','Ceramic Mug','Premium ceramic mug with minimal finish.')">
+
+<model-viewer src="models/mug.glb"
+auto-rotate
+camera-controls>
+</model-viewer>
+
+<h3>Ceramic Mug</h3>
+
+<p>Minimal premium finish</p>
+
+<label>
+<input type="checkbox" value="400" onclick="event.stopPropagation(); updateTotal()">
+Add (&#8377;400)
+</label>
+
+</div>
+
+<!-- PRODUCT -->
+
+<div class="card"
+onclick="openModal('models/bottle.glb','Steel Bottle','Elegant stainless steel bottle.')">
+
+<model-viewer src="models/bottle.glb"
+auto-rotate
+camera-controls>
+</model-viewer>
+
+<h3>Steel Bottle</h3>
+
+<p>Modern hydration essential</p>
+
+<label>
+<input type="checkbox" value="500" onclick="event.stopPropagation(); updateTotal()">
+Add (&#8377;500)
+</label>
+
+</div>
+
+<!-- PRODUCT -->
+
+<div class="card"
+onclick="openModal('models/notebook.glb','Notebook','Premium textured notebook.')">
+
+<model-viewer src="models/notebook.glb"
+auto-rotate
+camera-controls>
+</model-viewer>
+
+<h3>Notebook</h3>
+
+<p>Professional everyday carry</p>
+
+<label>
+<input type="checkbox" value="300" onclick="event.stopPropagation(); updateTotal()">
+Add (&#8377;300)
+</label>
+
+</div>
+
+<!-- PRODUCT -->
+
+<div class="card"
+onclick="openModal('models/pen.glb','Premium Pen','Elegant executive pen.')">
+
+<model-viewer src="models/pen.glb"
+auto-rotate
+camera-controls>
+</model-viewer>
+
+<h3>Premium Pen</h3>
+
+<p>Executive writing instrument</p>
+
+<label>
+<input type="checkbox" value="200" onclick="event.stopPropagation(); updateTotal()">
+Add (&#8377;200)
+</label>
+
+</div>
+
+<!-- PRODUCT -->
+
+<div class="card"
+onclick="openModal('models/bag.glb','Crossbody Bag','Modern utility carry.')">
+
+<model-viewer src="models/bag.glb"
+auto-rotate
+camera-controls>
+</model-viewer>
+
+<h3>Crossbody Bag</h3>
+
+<p>Functional & stylish</p>
+
+<label>
+<input type="checkbox" value="700" onclick="event.stopPropagation(); updateTotal()">
+Add (&#8377;700)
+</label>
+
+</div>
+
+<!-- PRODUCT -->
+
+<div class="card"
+onclick="openModal('models/tiffin.glb','Lunch Box','Smart self-heating lunch box.')">
+
+<model-viewer src="models/tiffin.glb"
+auto-rotate
+camera-controls>
+</model-viewer>
+
+<h3>Lunch Box</h3>
+
+<p>Premium workplace utility</p>
+
+<label>
+<input type="checkbox" value="900" onclick="event.stopPropagation(); updateTotal()">
+Add (&#8377;900)
+</label>
+
+</div>
+
+</div>
+
+<div class="total-bar">
+
+<h2>
+Total:
+&#8377;<span id="total">0</span>
+</h2>
+
+<button class="btn-primary"
+onclick="sendToWhatsApp()">
+Send Inquiry
+</button>
+
+</div>
+
+</section>
+
+<!-- FULLSCREEN MODAL -->
+
+<div id="productModal" class="modal">
+
+<span class="close"
+onclick="closeModal()">
+&times;
+</span>
+
+<div class="modal-content">
+
+<model-viewer
+id="modalViewer"
+src=""
+auto-rotate
+camera-controls>
+</model-viewer>
+
+<div class="modal-info">
+
+<h2 id="modalTitle"></h2>
+
+<p id="modalDesc"></p>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function updateTotal() {
+
+let total = 0;
+
+document.querySelectorAll('input[type=checkbox]:checked')
+.forEach(el => total += parseInt(el.value));
+
+document.getElementById('total').innerText = total;
+}
+
+function sendToWhatsApp() {
+
+let total =
+document.getElementById('total').innerText;
+
+let msg =
+`Hi, I would like to enquire about a custom onboarding kit. Total Selected Value: ₹${total}`;
+
+let url =
+`https://wa.me/918380040462?text=${encodeURIComponent(msg)}`;
+
+window.open(url,'_blank');
+}
+
+function openModal(model,title,desc){
+
+document.getElementById('productModal')
+.style.display='flex';
+
+document.getElementById('modalViewer')
+.setAttribute('src',model);
+
+document.getElementById('modalTitle')
+.innerText=title;
+
+document.getElementById('modalDesc')
+.innerText=desc;
+}
+
+function closeModal(){
+
+document.getElementById('productModal')
+.style.display='none';
+}
+
+</script>
+
+</body>
+</html>
